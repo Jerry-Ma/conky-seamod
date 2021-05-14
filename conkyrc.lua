@@ -6,6 +6,23 @@
 -- License : Distributed under the terms of GNU GPL version 2 or later
 -----------------------------------------------------------------------------
 
+-- custom settings
+_font0 = 'Cascadia Code PL:size=11'
+_font_bf = 'Cascadia Code PL:size=11:style=bold'
+_font_nm = 'Cascadia Code PL:size=11:style=normal'
+_font_bf_sm = 'Cascadia Code PL:size=11:style=bold'
+_font_nm_sm = 'Cascadia Code PL:size=11:style=normal'
+font0 = '${font ' .. _font0 .. '}'
+font_bf = '${font ' .. _font_bf .. '}'
+font_nm = '${font ' .. _font_nm .. '}'
+font_bf_sm = '${font ' .. _font_bf_sm .. '}'
+font_nm_sm = '${font ' .. _font_nm_sm .. '}'
+--print(font_bf)
+--print(font_nm)
+
+net0 = 'eth0'
+--- end of custom settings
+
 conky.config = {
 
 	background = true,
@@ -41,9 +58,12 @@ conky.config = {
 	draw_borders = false,
 	draw_graph_borders = false,
 
+    -- show_graph_scale = true,
+    -- show_graph_range = true,
+
 	override_utf8_locale = true,
 	use_xft = true,
-	font = 'caviar dreams:size=11',
+	font = _font0,
 	xftalpha = 0.5,
 	uppercase = false,
 
@@ -54,67 +74,74 @@ conky.config = {
 	color2 = '#AAAAAA',
 	color3 = '#888888',
 -- Orange
-	color4 = '#EF5A29',
+--	color4 = '#EF5A29',
+--	color4 = '#F05B02',
+--	color4 = '3b8eea',
+	color4 = '#f14c4c',
 -- Green
-	color5 = '#77B753',
+--	color5 = '#77B753',
+    color5 = '#23d18b',
 -- Loading lua script for drawning rings
 	lua_load = '~/.conky/seamod/seamod_rings.lua',
 	lua_draw_hook_pre = 'main',
 
 };
 
---${offset 15}${font Ubuntu:size=11:style=normal}${color1}${pre_exec lsb_release -d | cut -f 2} - $sysname $kernel
+--${offset 15}]] .. font_nm .. [[${color1}${pre_exec lsb_release -d | cut -f 2} - $sysname $kernel
 conky.text = [[
-${font Ubuntu:size=11:style=bold}${color4}SYSTEM ${hr 2}
-${offset 15}${font Ubuntu:size=11:style=normal}${color1}$sysname $kernel
-${offset 15}${font Ubuntu:size=11:style=normal}${color1}Battery:  ${color3}${battery_bar 5,150 BAT0} ${color3}${battery_percent BAT0}%
-${offset 15}${font Ubuntu:size=11:style=normal}${color1}Uptime: ${color3}$uptime
+]] .. font_bf .. [[ ${color4}SYSTEM ${hr 2}
+${offset 15}]] .. font_nm .. [[${color1}$sysname $kernel
+# ${offset 15}]] .. font_nm .. [[${color1}Battery:  ${color3}${battery_bar 5,150 BAT0} ${color3}${battery_percent BAT0}%
+${offset 15}]] .. font_nm .. [[${color1}Uptime: ${color3}$uptime
 
 # Showing CPU Graph
 ${voffset 20}
-${offset 125}${cpugraph cpu0 40,220 666666 666666 -0.3}${voffset -25}
-${offset 90}${font Ubuntu:size=11:style=bold}${color5}CPU
+${offset 125}${cpugraph cpu0 40,220 666666 666666 1}${voffset -15}
+${offset 90}]] .. font_bf .. [[${color5}CPU
 # Showing TOP 5 CPU-consumers
-${offset 105}${font Ubuntu:size=11:style=normal}${color4}${top name 1}${alignr}${top cpu 1}%
-${offset 105}${font Ubuntu:size=11:style=normal}${color1}${top name 2}${alignr}${top cpu 2}%
-${offset 105}${font Ubuntu:size=11:style=normal}${color2}${top name 3}${alignr}${top cpu 3}%
-${offset 105}${font Ubuntu:size=11:style=normal}${color3}${top name 4}${alignr}${top cpu 4}%
-${offset 105}${font Ubuntu:size=11:style=normal}${color3}${top name 5}${alignr}${top cpu 5}%
+${offset 105}]] .. font_nm .. [[${color4}${top name 1}${alignr}${top cpu 1}%
+${offset 105}]] .. font_nm .. [[${color1}${top name 2}${alignr}${top cpu 2}%
+${offset 105}]] .. font_nm .. [[${color2}${top name 3}${alignr}${top cpu 3}%
+${offset 105}]] .. font_nm .. [[${color3}${top name 4}${alignr}${top cpu 4}%
+${offset 105}]] .. font_nm .. [[${color3}${top name 5}${alignr}${top cpu 5}%
 
 #Showing memory part with TOP 5
-${voffset 40}
-${offset 90}${font Ubuntu:size=11:style=bold}${color5}MEM
-${offset 105}${font Ubuntu:size=11:style=normal}${color4}${top_mem name 1}${alignr}${top_mem mem_res 1}
-${offset 105}${font Ubuntu:size=11:style=normal}${color1}${top_mem name 2}${alignr}${top_mem mem_res 2}
-${offset 105}${font Ubuntu:size=11:style=normal}${color2}${top_mem name 3}${alignr}${top_mem mem_res 3}
-${offset 105}${font Ubuntu:size=11:style=normal}${color3}${top_mem name 4}${alignr}${top_mem mem_res 4}
-${offset 105}${font Ubuntu:size=11:style=normal}${color3}${top_mem name 4}${alignr}${top_mem mem_res 5}
+${voffset 25}
+${offset 90}]] .. font_bf .. [[${color5}MEM
+${offset 105}]] .. font_nm .. [[${color4}${top_mem name 1}${alignr}${top_mem mem_res 1}
+${offset 105}]] .. font_nm .. [[${color1}${top_mem name 2}${alignr}${top_mem mem_res 2}
+${offset 105}]] .. font_nm .. [[${color2}${top_mem name 3}${alignr}${top_mem mem_res 3}
+${offset 105}]] .. font_nm .. [[${color3}${top_mem name 4}${alignr}${top_mem mem_res 4}
+${offset 105}]] .. font_nm .. [[${color3}${top_mem name 4}${alignr}${top_mem mem_res 5}
 
 # Showing disk partitions: root, home and files
-${voffset 12}
-${offset 180}${color1}${font Ubuntu:size=10:style=bold}Disk Read: ${alignr}${font Ubuntu:size=10:style=normal}${color2}${diskio_read}
-${offset 180}${color1}${font Ubuntu:size=10:style=bold}Disk Write: ${alignr}${font Ubuntu:size=10:style=normal}${color2}${diskio_write}
-${voffset -30}
-${offset 90}${font Ubuntu:size=11:style=bold}${color5}DISKS
-${offset 120}${diskiograph 40,220 666666 666666 -0.5}${voffset -30}
 ${voffset 20}
-${offset 15}${font Ubuntu:size=10:style=bold}${color1}Free: $color3${font Ubuntu:size=10:style=normal}${fs_free /}${alignr}${font Ubuntu:size=10:style=bold}${color1}Used: $color3${font Ubuntu:size=10:style=normal}${fs_used /}
-${offset 15}${font Ubuntu:size=10:style=bold}${color1}Free: $color3${font Ubuntu:size=10:style=normal}${fs_free /home}${alignr}${font Ubuntu:size=10:style=bold}${color1}Used: $color3${font Ubuntu:size=10:style=normal}${fs_used /home}
-${offset 15}${font Ubuntu:size=10:style=bold}${color1}Free: $color3${font Ubuntu:size=10:style=normal}${fs_free /media/files}${alignr}${font Ubuntu:size=10:style=bold}${color1}Used: $color3${font Ubuntu:size=10:style=normal}${fs_used /media/files}
+${offset 90}]] .. font_bf .. [[${color5}DISKS
+${voffset -72}
+${offset 250}${color1}]] .. font_bf_sm .. [[R: ${alignr}]] .. font_nm_sm .. [[${color2}${diskio_read}
+${offset 250}${color1}]] .. font_bf_sm .. [[W: ${alignr}]] .. font_nm_sm .. [[${color2}${diskio_write}
+${offset 120}${diskiograph 40,220 666666 666666 1000000 -l}${voffset -30}
+${voffset 10}
+${offset 100}]] .. font_bf_sm .. [[${color1}     /: ${alignr}$color3]] .. font_nm_sm .. [[${fs_used /} / ${fs_size /}
+${offset 100}]] .. font_bf_sm .. [[${color1} /home: ${alignr}$color3]] .. font_nm_sm .. [[${fs_used /home} / ${fs_size /home}
+${offset 100}]] .. font_bf_sm .. [[${color1}/mnt/c: ${alignr}$color3]] .. font_nm_sm .. [[${fs_used /mnt/c} / ${fs_size /mnt/c}
+# ${offset 15}]] .. font_bf_sm .. [[${color1}Free: $color3]] .. font_nm_sm .. [[${fs_free /}${alignr}]] .. font_bf_sm .. [[${color1}Used: $color3]] .. font_nm_sm .. [[${fs_used /}
+# ${offset 15}]] .. font_bf_sm .. [[${color1}Free: $color3]] .. font_nm_sm .. [[${fs_free /home}${alignr}]] .. font_bf_sm .. [[${color1}Used: $color3]] .. font_nm_sm .. [[${fs_used /home}
+# ${offset 15}]] .. font_bf_sm .. [[${color1}Free: $color3]] .. font_nm_sm .. [[${fs_free /mnt/c}${alignr}]] .. font_bf_sm .. [[${color1}Used: $color3]] .. font_nm_sm .. [[${fs_used /mnt/c}
 
 # Network data (my desktop have only LAN). ETHERNET ring is mostly useless but looks pretty, main info is in the graphs
-${voffset 45}
-${offset 200}${font Ubuntu:size=10:style=bold}${color1}Lan IP: ${alignr}$color3${addr wlan0} 
-${offset 200}${font Ubuntu:size=10:style=bold}${color1}Ext IP: ${alignr}$color3${execi 600 wget -q -O /dev/stdout http://checkip.dyndns.org/ | cut -d : -f 2- | cut -d \< -f -1} 
-${offset 190}${font Ubuntu:size=10:style=bold}${alignr}$color3${execi 600 wget -q -O /dev/stdout https://www.dnsleaktest.com/ | grep from | grep -o '<p>.*<img' | grep -o '>.*<' | grep -oEi '[a-zA-Z0-9 ,]+'}
+${voffset 33}
+${offset 90}]] .. font_bf .. [[${color5}ETHERNET
+${voffset -20}
+${offset 180}]] .. font_bf_sm .. [[${color1}Lan: ${alignr}$color3${addr eth0}
+${offset 180}]] .. font_bf_sm .. [[${color1}Ext: ${alignr}$color3${execi 600 wget -q -O /dev/stdout http://checkip.dyndns.org/ | cut -d : -f 2- | cut -d \< -f -1}
+# ${offset 190}]] .. font_bf_sm .. [[${alignr}$color3${execi 600 wget -q -O /dev/stdout https://www.dnsleaktest.com/ | grep from | grep -o '<p>.*<img' | grep -o '>.*<' | grep -oEi '[a-zA-Z0-9 ,]+'}
 
-${voffset -60}
-${offset 90}${font Ubuntu:size=11:style=bold}${color5}ETHERNET
-${voffset 40}             
-${offset 15}${color1}${font ubuntu:size=10:style=bold}Up: ${alignr}${font Ubuntu:size=10:style=normal}$color2${upspeed wlan0} / ${totalup wlan0}
-${offset 15}${upspeedgraph wlan0 40,320 4B1B0C FF5C2B 1280KiB -l}
-${offset 15}${color1}${font Ubuntu:size=10:style=bold}Down: ${alignr}${font Ubuntu:size=10:style=normal}$color2${downspeed wlan0} / ${totaldown wlan0}
-${offset 15}${downspeedgraph wlan0 40,320 324D23 77B753 1280KiB -l}
+${voffset -20}
+${offset 110}${color1}]] .. font_bf_sm .. [[Up: ${alignr}]] .. font_nm_sm .. [[$color2${upspeed eth0} / ${totalup eth0}
+${offset 110}${upspeedgraph eth0 40,225 4B1B0C F14C4c 100000000 -l}
+${offset 110}${color1}]] .. font_bf_sm .. [[Down: ${alignr}]] .. font_nm_sm .. [[$color2${downspeed eth0} / ${totaldown eth0}
+${offset 110}${downspeedgraph eth0 40,225 324D23 23d18b 100000000 -l}
 
 ${color4}${hr 2}
 
